@@ -1,0 +1,95 @@
+<!-- HTML for the form -->
+<form id="subscription-form">
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br>
+  <label for="interests">Interests:</label><br>
+  <select id="interests" name="interests" multiple>
+    <option value="frontend">Frontend development</option>
+    <option value="backend">Backend development</option>
+    <option value="devops">DevOps</option>
+    <option value="mobile">Mobile development</option>
+    <option value="data">Data science</option>
+  </select><br><br>
+  <input type="submit" value="Subscribe">
+</form> 
+
+<!-- CSS for styling the form -->
+<style>
+form {
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="email"] {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+select {
+  width: 100%;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  height: 40px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+</style>
+
+<!-- JavaScript for form validation and submission handling -->
+<script>
+// get form element
+const form = document.getElementById("subscription-form");
+
+// add submit event listener to form
+form.addEventListener("submit", function(event) {
+  // prevent default form submission behavior
+  event.preventDefault();
+
+  // get email and interests form elements
+  const email = document.getElementById("email").value;
+  const interests = document.getElementById("interests").value;
+
+  // validate email
+  if (!isValidEmail(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  // validate interests
+  if (interests.length === 0) {
+    alert("Please select at least one interest.");
+    return;
+  }
+
+  // form is valid, send subscription request to server
+  sendSubscriptionRequest(email, interests);
+});
+
+// email validation function
+function isValidEmail(email) {
+  // regex pattern for valid email addresses
+  const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+ 
